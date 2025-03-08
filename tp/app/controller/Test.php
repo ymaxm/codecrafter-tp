@@ -9,10 +9,9 @@ class Test extends BaseController
 {
 
 
+    public function test(){
+        return json(Db::query("SELECT * FROM post WHERE plate IN (SELECT id FROM plate WHERE permission <= ?)",[1]));
 
-    public function getUser()
-    {
-        $result = Db::table("user")->where(1)->find();
-        return json($result);
     }
+
 }
