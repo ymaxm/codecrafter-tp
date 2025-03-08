@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MessDetectorOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PHPCSFixerOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PHPCodeSnifferOptionsConfiguration">
+    <option name="highlightLevel" value="WARNING" />
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/tp/vendor/composer" />
+      <path value="$PROJECT_DIR$/tp/vendor/topthink/framework" />
+      <path value="$PROJECT_DIR$/tp/vendor/topthink/think-container" />
+      <path value="$PROJECT_DIR$/tp/vendor/topthink/think-dumper" />
+      <path value="$PROJECT_DIR$/tp/vendor/topthink/think-filesystem" />
+      <path value="$PROJECT_DIR$/tp/vendor/topthink/think-helper" />
+      <path value="$PROJECT_DIR$/tp/vendor/topthink/think-orm" />
+      <path value="$PROJECT_DIR$/tp/vendor/topthink/think-trace" />
+      <path value="$PROJECT_DIR$/tp/vendor/topthink/think-validate" />
+      <path value="$PROJECT_DIR$/tp/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/tp/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/tp/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/tp/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/tp/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/tp/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/tp/vendor/league/flysystem-cached-adapter" />
+      <path value="$PROJECT_DIR$/tp/vendor/league/mime-type-detection" />
+      <path value="$PROJECT_DIR$/tp/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/tp/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/fig/http-message-util" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/slim/psr7" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/bacon/bacon-qr-code" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/brick/math" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/nikic/fast-route" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/google/recaptcha" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/league/uri" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/league/uri-interfaces" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/ramsey/collection" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/dasprid/enum" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/fgrosse/phpasn1" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/symfony/cache" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/symfony/cache-contracts" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/symfony/config" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/symfony/dependency-injection" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/symfony/expression-language" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/symfony/var-exporter" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/beberlei/assert" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/code-lts/u2f-php-server" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/pragmarx/google2fa" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/pragmarx/google2fa-qrcode" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/web-auth/cose-lib" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/web-auth/metadata-service" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/web-auth/webauthn-lib" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/paragonie/constant_time_encoding" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/paragonie/sodium_compat" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/phpmyadmin/motranslator" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/phpmyadmin/shapefile" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/phpmyadmin/sql-parser" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/phpmyadmin/twig-i18n-extension" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/tecnickcom/tcpdf" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/williamdes/mariadb-mysql-kbs" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/spomky-labs/base64url" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/spomky-labs/cbor-php" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/thecodingmachine/safe" />
+      <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
+  <component name="PhpStanOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/autoload.php" />
+    </phpunit_settings>
+  </component>
+  <component name="PsalmOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+</project>
