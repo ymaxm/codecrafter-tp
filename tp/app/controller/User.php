@@ -11,6 +11,14 @@ class User extends BaseController
 {
     public function getCode($email = "")
     {
+        if(!limitSpeed(2,5,60*10))
+        {
+            $return = array(
+                "code" => 2,
+                "msg" => "操作速度过快!请稍后再试"
+            );
+            return json($return);
+        }
         if($email == "")
         {
             $return = array(
@@ -39,6 +47,14 @@ class User extends BaseController
         );
     }
     public function register($username = "",$password = "",$email = "",$code = ""){
+        if(!limitSpeed(3,10,60*60))
+        {
+            $return = array(
+                "code" => 2,
+                "msg" => "操作速度过快!请稍后再试"
+            );
+            return json($return);
+        }
         if($username == "" and $password == "" and $email == ""){
             Session::delete("code");
             $return = array(
@@ -92,7 +108,7 @@ class User extends BaseController
         }
 
         //判断用户是否被注册
-        $result = Db::table("user")->where("username",$username)->whereOr("email",$email)->whereOr("ip",$this->get_client_ip())->find();
+        $result = Db::table("user")->where("username",$username)->whereOr("email",$email)->whereOr("ip",get_client_ip())->find();
         if($result <> null)
         {
             Session::delete("code");
@@ -104,12 +120,12 @@ class User extends BaseController
         }
 
         $result = Db::table("user")->insert([
-            "uid" => md5(uniqid(rand(), true)),
+            "uid" => getUID(),
             "username" => $username,
             "password" => md5($password),
             "email" => $email,
-            "login" => md5(uniqid(rand(), true)),
-            "ip" => $this->get_client_ip()
+            "login" => getUID(),
+            "ip" => get_client_ip()
         ]);
         if($result){
             Session::delete("code");
@@ -130,6 +146,14 @@ class User extends BaseController
     }
     public function login($username = "",$password = "")
     {
+        if(!limitSpeed(5,10,60*10))
+        {
+            $return = array(
+                "code" => 2,
+                "msg" => "操作速度过快!请稍后再试"
+            );
+            return json($return);
+        }
         if(Session::has("username"))
         {
             $return = array(
@@ -151,6 +175,8 @@ class User extends BaseController
         $result = Db::table("user")->where("username",$username)->where("password",md5($password))->find();
         if($result <> null)
         {
+            $userid = Db::table("user")->where("username",$username)->value("id");
+            Session::set('userid', $userid);
             Session::set('username', $username);
             $return = array(
                 "code" => 1,
@@ -182,27 +208,5 @@ class User extends BaseController
         );
         return json($return);
     }
-    function get_client_ip($type = 0) {
-        $type       =  $type ? 1 : 0;
-        static $ip  =   NULL;
-        if ($ip !== NULL) return $ip[$type];
-        if(isset($_SERVER['HTTP_X_REAL_IP'])){//nginx 代理模式下，获取客户端真实IP
-            $ip=$_SERVER['HTTP_X_REAL_IP'];
-        }elseif (isset($_SERVER['HTTP_CLIENT_IP'])) {//客户端的ip
-            $ip     =   $_SERVER['HTTP_CLIENT_IP'];
-        }elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {//浏览当前页面的用户计算机的网关
-            $arr    =   explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
-            $pos    =   array_search('unknown',$arr);
-            if(false !== $pos) unset($arr[$pos]);
-            $ip     =   trim($arr[0]);
-        }elseif (isset($_SERVER['REMOTE_ADDR'])) {
-            $ip     =   $_SERVER['REMOTE_ADDR'];//浏览当前页面的用户计算机的ip地址
-        }else{
-            $ip=$_SERVER['REMOTE_ADDR'];
-        }
-        // IP地址合法验证
-        $long = sprintf("%u",ip2long($ip));
-        $ip   = $long ? array($ip, $long) : array('0.0.0.0', 0);
-        return $ip[$type];
-    }
+
 }
