@@ -208,5 +208,21 @@ class User extends BaseController
         );
         return json($return);
     }
-
+    public function checkLogin(){
+        if(Session::has("userid"))
+        {
+            $return = array(
+                "code" => 1,
+                "msg" => "已登录"
+            );
+            return json($return);
+        }
+        else{
+            $return = array(
+                "code" => 2,
+                "msg" => "未登录"
+            );
+            return json($return);
+        }
+    }
 }
