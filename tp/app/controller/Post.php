@@ -77,7 +77,11 @@ class Post extends BaseController
         else{
             $permission = $user_info["permission"];
         }
-        $result = Db::query("SELECT * FROM post WHERE plate IN (SELECT id FROM plate WHERE permission <= ?)",[$permission]);
+
+        $where = array();
+        $where['id'] = Db::table("plate")->where("permission","<=",$permission)->column("id");
+
+        $result = Db::table("post")->limit(($page - 1) * 10,10)->where($where)->select()->toArray();
         if(!empty($result))
         {
             $return = array(
@@ -116,6 +120,36 @@ class Post extends BaseController
             $return = array(
                 "code" => 1,
                 "msg" => $result
+            );
+            return json($return);
+        }
+    }
+    public function searchPost($keyword){
+        $user_info = $this->getUser();
+        if($user_info == null)
+        {
+            $permission = 0;
+        }
+        else{
+            $permission = $user_info["permission"];
+        }
+        $where = array();
+        $where['id'] = Db::table("plate")->where("permission","<=",$permission)->column("id");
+
+        $result = Db::table("post")->where("title","like","%".$keyword."%")->where($where)->select()->toArray();
+
+        if(!empty($result))
+        {
+            $return = array(
+                "code" => 1,
+                "msg" => $result
+            );
+            return json($return);
+        }
+        else{
+            $return = array(
+                "code" => 2,
+                "msg" => "无数据"
             );
             return json($return);
         }
