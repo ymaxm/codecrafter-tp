@@ -1,8 +1,19 @@
 <?php
 // 应用公共文件
 
+use think\facade\Db;
+use think\facade\Session;
+
+
+
 function getUID(){
-    return md5(uniqid(rand(), true));
+    $chars = md5(uniqid(mt_rand(), true));
+    $uuid = substr ( $chars, 0, 8 ) . '-'
+        . substr ( $chars, 8, 4 ) . '-'
+        . substr ( $chars, 12, 4 ) . '-'
+        . substr ( $chars, 16, 4 ) . '-'
+        . substr ( $chars, 20, 12 );
+    return $uuid ;
 }
 
 function get_client_ip($type = 0) {
@@ -72,4 +83,36 @@ function limitSpeed($type,$max_count,$time)
         return true;
     }
 
+}
+
+function getUser(){
+    if(Session::has("userid")){
+        $return = Db::table("user")->where(session("userid"))->find();
+        return $return;
+    }
+    else{
+        return null;
+    }
+}
+
+function getUserPermission(){
+    $user_info = getUser();
+    if($user_info == null)
+    {
+        $permission = 0;
+    }
+    else{
+        $permission = $user_info["permission"];
+    }
+    return $permission;
+}
+
+function addSingleValue($array,$key,$value)
+{
+    $array_count = count($array);
+    for($i = 0; $i < $array_count; $i++)
+    {
+        $array[$i][$key] = $value;
+    }
+    return $array;
 }

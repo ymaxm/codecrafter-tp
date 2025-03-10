@@ -87,6 +87,9 @@
       <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/spomky-labs/cbor-php" />
       <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/thecodingmachine/safe" />
       <path value="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/composer" />
+      <path value="$PROJECT_DIR$/tp/vendor/workerman/gateway-worker" />
+      <path value="$PROJECT_DIR$/tp/vendor/topthink/think-worker" />
+      <path value="$PROJECT_DIR$/tp/vendor/workerman/workerman" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
@@ -96,6 +99,7 @@
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/tp/public/phpMyAdmin5.2.2/vendor/autoload.php" />
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/tp/vendor/autoload.php" />
     </phpunit_settings>
   </component>
   <component name="PsalmOptionsConfiguration">

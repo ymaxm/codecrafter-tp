@@ -13,7 +13,8 @@ class Post extends BaseController
         {
             $return = array(
                 "code" => 2,
-                "msg" => "操作速度过快!请稍后再试"
+                "msg" => "操作速度过快!请稍后再试",
+                "data" => []
             );
             return json($return);
         }
@@ -21,7 +22,8 @@ class Post extends BaseController
         {
             $return = array(
                 "code" => 2,
-                "msg" => "您尚未登录"
+                "msg" => "您尚未登录",
+                "data" => []
             );
             return json($return);
         }
@@ -30,7 +32,8 @@ class Post extends BaseController
         {
             $return = array(
                 "code" => 2,
-                "msg" => "权限不足"
+                "msg" => "权限不足",
+                "data" => []
             );
             return json($return);
         }
@@ -38,7 +41,8 @@ class Post extends BaseController
         {
             $return = array(
                 "code" => 2,
-                "msg" => "标题或内容或板块不能为空"
+                "msg" => "标题或内容或板块不能为空",
+                "data" => []
             );
             return json($return);
         }
@@ -52,14 +56,16 @@ class Post extends BaseController
         if($result){
             $return = array(
                 "code" => 1,
-                "msg" => "发布成功"
+                "msg" => "发布成功",
+                "data" => []
             );
             return json($return);
         }
         else{
             $return = array(
                 "code" => 2,
-                "msg" => "发生意外错误"
+                "msg" => "发生意外错误",
+                "data" => []
             );
             return json($return);
         }
@@ -69,7 +75,7 @@ class Post extends BaseController
         {
             $page = 1;
         }
-        $user_info = $this->getUser();
+        $user_info = getUser();
         if($user_info == null)
         {
             $permission = 0;
@@ -79,27 +85,29 @@ class Post extends BaseController
         }
 
         $where = array();
-        $where['id'] = Db::table("plate")->where("permission","<=",$permission)->column("id");
+        $where = Db::table("plate")->where("permission","<=",$permission)->column("id");
 
-        $result = Db::table("post")->limit(($page - 1) * 10,10)->where($where)->select()->toArray();
+        $result = Db::table("post")->limit(($page - 1) * 10,10)->whereIn("plate",$where)->withoutField("id")->select()->toArray();
         if(!empty($result))
         {
-            $return = array(
+            $return = [
                 "code" => 1,
-                "msg" => $result
-            );
+                "msg" => "成功",
+                "data" => $result
+            ];
             return json($return);
         }
         else{
             $return = array(
                 "code" => 2,
-                "msg" => "没有数据"
+                "msg" => "没有数据",
+                "data" => []
             );
             return json($return);
         }
     }
     public function getPlateList(){
-        $user_info = $this->getUser();
+        $user_info = getUser();
         if($user_info == null)
         {
             $permission = 0;
@@ -112,55 +120,56 @@ class Post extends BaseController
         {
             $return = array(
                 "code" => 2,
-                "msg" => "无数据"
+                "msg" => "无数据",
+                "data" => []
             );
             return json($return);
         }
         else {
             $return = array(
                 "code" => 1,
-                "msg" => $result
+                "msg" => "成功",
+                "data" => $result
             );
             return json($return);
         }
     }
     public function searchPost($keyword){
-        $user_info = $this->getUser();
-        if($user_info == null)
-        {
-            $permission = 0;
-        }
-        else{
-            $permission = $user_info["permission"];
-        }
+        $permission = getUserPermission();
         $where = array();
-        $where['id'] = Db::table("plate")->where("permission","<=",$permission)->column("id");
+        $where = Db::table("plate")->where("permission","<=",$permission)->column("id");
 
-        $result = Db::table("post")->where("title","like","%".$keyword."%")->where($where)->select()->toArray();
+        $result = Db::table("post")->where("title","like","%".$keyword."%")->whereIn("plate",$where)->select()->toArray();
 
         if(!empty($result))
         {
             $return = array(
                 "code" => 1,
-                "msg" => $result
+                "msg" => "成功",
+                "data" => $result
             );
             return json($return);
         }
         else{
             $return = array(
                 "code" => 2,
-                "msg" => "无数据"
+                "msg" => "无数据",
+                "data" => []
             );
             return json($return);
         }
     }
-    function getUser(){
-        if(Session::has("userid")){
-            $return = Db::table("user")->where(session("userid"))->find();
-            return $return;
+    public function getPost($uid){
+        $result = Db::table("post")->where("uid",$uid)->find();
+        if($result == null)
+        {
+            $return = array(
+                "code" => 2,
+                "msg" => "无数据",
+                "data" => []
+            );
+            return json($return);
         }
-        else{
-            return null;
-        }
+        return 'Test API';
     }
 }

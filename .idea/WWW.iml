@@ -82,6 +82,9 @@
       <excludeFolder url="file://$MODULE_DIR$/tp/vendor/topthink/think-orm" />
       <excludeFolder url="file://$MODULE_DIR$/tp/vendor/topthink/think-trace" />
       <excludeFolder url="file://$MODULE_DIR$/tp/vendor/topthink/think-validate" />
+      <excludeFolder url="file://$MODULE_DIR$/tp/vendor/topthink/think-worker" />
+      <excludeFolder url="file://$MODULE_DIR$/tp/vendor/workerman/gateway-worker" />
+      <excludeFolder url="file://$MODULE_DIR$/tp/vendor/workerman/workerman" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

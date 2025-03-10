@@ -15,7 +15,8 @@ class User extends BaseController
         {
             $return = array(
                 "code" => 2,
-                "msg" => "操作速度过快!请稍后再试"
+                "msg" => "操作速度过快!请稍后再试",
+                "data" => []
             );
             return json($return);
         }
@@ -23,7 +24,8 @@ class User extends BaseController
         {
             $return = array(
                 "code" => 2,
-                "msg" => "邮箱不能为空"
+                "msg" => "邮箱不能为空",
+                "data" => []
             );
             return json($return);
         }
@@ -31,7 +33,8 @@ class User extends BaseController
         {
             $return = array(
                 "code" => 2,
-                "msg" => "您已获取过验证码"
+                "msg" => "您已获取过验证码",
+                "data" => []
             );
             return json($return);
         }
@@ -42,7 +45,8 @@ class User extends BaseController
         return json(
             array(
                 "code" => 1,
-                "msg" => $rand
+                "msg" => $rand,
+                "data" => []
             )
         );
     }
@@ -51,7 +55,8 @@ class User extends BaseController
         {
             $return = array(
                 "code" => 2,
-                "msg" => "操作速度过快!请稍后再试"
+                "msg" => "操作速度过快!请稍后再试",
+                "data" => []
             );
             return json($return);
         }
@@ -59,7 +64,8 @@ class User extends BaseController
             Session::delete("code");
             $return = array(
                 "code" => 2,
-                "msg" => "用户名,密码,邮箱不能为空"
+                "msg" => "用户名,密码,邮箱不能为空",
+                "data" => []
             );
             return json($return);
         }
@@ -68,7 +74,8 @@ class User extends BaseController
             Session::delete("code");
             $return = array(
                 "code" => 2,
-                "msg" => "验证码错误"
+                "msg" => "验证码错误",
+                "data" => []
             );
             return json($return);
         }
@@ -77,7 +84,8 @@ class User extends BaseController
             Session::delete("code");
             $return = array(
                 "code" => 2,
-                "msg" => "验证码错误"
+                "msg" => "验证码错误",
+                "data" => []
             );
             return json($return);
         }
@@ -85,7 +93,8 @@ class User extends BaseController
             Session::delete("code");
             $return = array(
                 "code" => 2,
-                "msg" => "用户名必须大于2字小于20字"
+                "msg" => "用户名必须大于2字小于20字",
+                "data" => []
             );
             return json($return);
         }
@@ -93,7 +102,8 @@ class User extends BaseController
             Session::delete("code");
             $return = array(
                 "code" => 2,
-                "msg" => "邮箱格式不正确"
+                "msg" => "邮箱格式不正确",
+                "data" => []
             );
             return json($return);
         }
@@ -102,7 +112,8 @@ class User extends BaseController
             Session::delete("code");
             $return = array(
                 "code" => 2,
-                "msg" => "用户名或邮箱不能等于密码"
+                "msg" => "用户名或邮箱不能等于密码",
+                "data" => []
             );
             return json($return);
         }
@@ -114,7 +125,8 @@ class User extends BaseController
             Session::delete("code");
             $return = array(
                 "code" => 2,
-                "msg" => "该用户名或邮箱已被注册,或您的ip已被注册"
+                "msg" => "该用户名或邮箱已被注册,或您的ip已被注册",
+                "data" => []
             );
             return json($return);
         }
@@ -131,7 +143,8 @@ class User extends BaseController
             Session::delete("code");
             $return = array(
                 "code" => 1,
-                "msg" => "注册成功"
+                "msg" => "注册成功",
+                "data" => []
             );
             return json($return);
         }
@@ -139,7 +152,8 @@ class User extends BaseController
             Session::delete("code");
             $return = array(
                 "code" => 2,
-                "msg" => "发生意外错误"
+                "msg" => "发生意外错误",
+                "data" => []
             );
             return json($return);
         }
@@ -150,7 +164,8 @@ class User extends BaseController
         {
             $return = array(
                 "code" => 2,
-                "msg" => "操作速度过快!请稍后再试"
+                "msg" => "操作速度过快!请稍后再试",
+                "data" => []
             );
             return json($return);
         }
@@ -158,7 +173,8 @@ class User extends BaseController
         {
             $return = array(
                 "code" => 2,
-                "msg" => "您已登录"
+                "msg" => "您已登录",
+                "data" => []
             );
             return json($return);
         }
@@ -167,7 +183,8 @@ class User extends BaseController
         {
             $return = array(
                 "code" => 2,
-                "msg" => "用户名和密码不能为空"
+                "msg" => "用户名和密码不能为空",
+                "data" => []
             );
             return json($return);
         }
@@ -176,18 +193,23 @@ class User extends BaseController
         if($result <> null)
         {
             $userid = Db::table("user")->where("username",$username)->value("id");
+            Db::table("user")->where("id",$userid)->update(
+                ["login" => getUID()]
+            );
             Session::set('userid', $userid);
             Session::set('username', $username);
             $return = array(
                 "code" => 1,
-                "msg" => "登录成功"
+                "msg" => "登录成功",
+                "data" => []
             );
             return json($return);
         }
         else{
             $return = array(
                 "code" => 2,
-                "msg" => "用户名或密码错误"
+                "msg" => "用户名或密码错误",
+                "data" => []
             );
             return json($return);
         }
@@ -197,14 +219,16 @@ class User extends BaseController
         {
             $return = array(
                 "code" => 2,
-                "msg" => "您未登录"
+                "msg" => "您未登录",
+                "data" => []
             );
             return json($return);
         }
         Session::clear();
         $return = array(
             "code" => 1,
-            "msg" => "登出成功"
+            "msg" => "登出成功",
+            "data" => []
         );
         return json($return);
     }
@@ -213,14 +237,16 @@ class User extends BaseController
         {
             $return = array(
                 "code" => 1,
-                "msg" => "已登录"
+                "msg" => "已登录",
+                "data" => []
             );
             return json($return);
         }
         else{
             $return = array(
                 "code" => 2,
-                "msg" => "未登录"
+                "msg" => "未登录",
+                "data" => []
             );
             return json($return);
         }
