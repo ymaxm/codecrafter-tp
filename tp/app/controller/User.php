@@ -232,6 +232,29 @@ class User extends BaseController
         );
         return json($return);
     }
+    public function getUserInfo($user_uid = ''){
+        if($user_uid == '')
+        {
+            if(Session::has("userid"))
+            {
+                $user_uid = Db::table("user")->where("id",session("userid"))->value("uid");
+                $result = Db::table("user")->where("uid",$user_uid)->withoutField(["id","password"])->select()->toArray();
+            }
+            else{
+                $return = array(
+                    "code" => 2,
+                    "msg" => "您尚未登录",
+                    "data" => []
+                );
+                return json($return);
+            }
+        }
+        else{
+            $result = Db::table("user")->where("uid",$user_uid)->withoutField(["id","ip","login","password"])->select()->toArray();
+        }
+        return json($result);
+
+    }
     public function checkLogin(){
         if(Session::has("userid"))
         {

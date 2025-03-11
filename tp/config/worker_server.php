@@ -86,7 +86,8 @@ return [
                     }
                     else{
                         //被发送者已上线
-                        $connect_user[$get_data['to']]->send($get_data['msg']);
+                        $myname = \think\facade\Db::table("user")->where("uid", $get_data['user'])->value("username");
+                        $connect_user[$get_data['to']]->send('{"from":"'.$myname.'","msg":"'.$get_data['msg'].'"}');
                         $myid = \think\facade\Db::table("user")->where("uid", $get_data['user'])->value("id");
                         $result = \think\facade\Db::table("message")->insert(
                             [
