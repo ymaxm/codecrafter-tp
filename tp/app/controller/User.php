@@ -258,10 +258,11 @@ class User extends BaseController
     public function checkLogin(){
         if(Session::has("userid"))
         {
+            $result = Db::table("user")->where("id",session("userid"))->withoutField(["id","password"])->select()->toArray();
             $return = array(
                 "code" => 1,
                 "msg" => "已登录",
-                "data" => []
+                "data" => $result
             );
             return json($return);
         }

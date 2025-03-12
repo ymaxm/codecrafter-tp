@@ -39,7 +39,25 @@ return [
     },
     // onConnect
     'onConnect'      => function ($connection) {
-        $connection->send("success");
+        $connection->onWebSocketConnect = function($connection , $http_header){
+            global $connect_user;
+            $get_data = $_GET;
+            if(!isset($get_data['user']) or !isset($get_data['user_login']))
+            {
+                $connection->send('{"code":2,"msg":"参数不能为空","data":[]}');
+                $connection->close();
+            }
+            else{
+                $login_token = \think\facade\Db::table("user")->where("uid", $get_data['user'])->value("login");
+                if ($login_token <> $get_data['user_login']) {
+                    $connection->send('{"code":2,"msg":"登录信息有误,请尝试重新登录","data":[]}');
+                    $connection->close($connection);
+                } else {
+                    $connect_user[$get_data['user']] = $connection;
+                    $connection->send('{"code":1,"msg":"用户信息连接成功","data":[]}');
+                }
+            }
+        };
     },
     // onMessage
     'onMessage'      => function ($connection, $data) {
