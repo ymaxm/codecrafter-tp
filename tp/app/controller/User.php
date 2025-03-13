@@ -9,8 +9,9 @@ use think\facade\Session;
 
 class User extends BaseController
 {
-    public function getCode($email = "")
+    public function getCode()
     {
+        $email = request()->post('email');
         if(!limitSpeed(2,5,60*10))
         {
             $return = array(
@@ -50,7 +51,13 @@ class User extends BaseController
             )
         );
     }
-    public function register($username = "",$password = "",$email = "",$code = ""){
+    public function register(){
+        $username = request()->param("username");
+        $password = request()->param("password");
+        $email = request()->param("email");
+        $code = request()->param("code");
+        $username = str_replace(" ","",$username);
+        $email = str_replace(" ","",$email);
         if(!limitSpeed(3,10,60*60))
         {
             $return = array(
@@ -158,8 +165,10 @@ class User extends BaseController
             return json($return);
         }
     }
-    public function login($username = "",$password = "")
+    public function login()
     {
+        $username = request()->param("username");
+        $password = request()->param("password");
         if(!limitSpeed(5,10,60*10))
         {
             $return = array(
@@ -232,6 +241,96 @@ class User extends BaseController
         );
         return json($return);
     }
+    public function resetPassword(){
+        $email = request()->post("email");
+        $new_password = request()->post("new_password");
+        $code = request()->post("code");
+        if($new_password == "")
+        {
+            Session::delete("code");
+            Session::delete("code_email");
+            $return = array(
+                "code" => 2,
+                "msg" => "密码不能为空",
+                "data" => []
+            );
+            return json($return);
+        }
+        if($email <> session("code_email"))
+        {
+            Session::delete("code");
+            Session::delete("code_email");
+            $return = array(
+                "code" => 2,
+                "msg" => "验证码错误",
+                "data" => []
+            );
+            return json($return);
+        }
+        if($code <> session("code"))
+        {
+            Session::delete("code");
+            Session::delete("code_email");
+            $return = array(
+                "code" => 2,
+                "msg" => "验证码错误",
+                "data" => []
+            );
+            return json($return);
+        }
+        $userid = Db::table("user")->where("email",$email)->value("id",0);
+        $userpsw = Db::table("user")->where("email",$email)->value("password","");
+        if($userid == 0)
+        {
+            Session::delete("code");
+            Session::delete("code_email");
+            $return = array(
+                "code" => 2,
+                "msg" => "用户不存在",
+                "data" => []
+            );
+            return json($return);
+        }
+        else{
+            if(md5($new_password) == $userpsw)
+            {
+                Session::delete("code");
+                Session::delete("code_email");
+                $return = array(
+                    "code" => 2,
+                    "msg" => "密码不能与原密码一致",
+                    "data" => []
+                );
+                return json($return);
+            }
+            $result = Db::table("user")->where("id",$userid)->update(
+                [
+                    "password" => md5($new_password),
+                    "login" => getUID()
+                ]
+            );
+            if($result){
+                Session::delete("code");
+                Session::delete("code_email");
+                $return = array(
+                    "code" => 1,
+                    "msg" => "修改成功",
+                    "data" => []
+                );
+                return json($return);
+            }
+            else{
+                Session::delete("code");
+                Session::delete("code_email");
+                $return = array(
+                    "code" => 2,
+                    "msg" => "修改失败",
+                    "data" => []
+                );
+                return json($return);
+            }
+        }
+    }
     public function getUserInfo($user_uid = ''){
         if($user_uid == '')
         {
@@ -252,7 +351,13 @@ class User extends BaseController
         else{
             $result = Db::table("user")->where("uid",$user_uid)->withoutField(["id","ip","login","password"])->select()->toArray();
         }
-        return json($result);
+        $return = array(
+            "code" => 1,
+            "msg" => "成功",
+            "data" => $result
+        );
+
+        return json($return);
 
     }
     public function checkLogin(){

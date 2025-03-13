@@ -51,7 +51,7 @@ return [
                 $login_token = \think\facade\Db::table("user")->where("uid", $get_data['user'])->value("login");
                 if ($login_token <> $get_data['user_login']) {
                     $connection->send('{"code":2,"msg":"登录信息有误,请尝试重新登录","data":[]}');
-                    $connection->close($connection);
+                    $connection->close();
                 } else {
                     $connect_user[$get_data['user']] = $connection;
                     $connection->send('{"code":1,"msg":"用户信息连接成功","data":[]}');
@@ -131,10 +131,15 @@ return [
     },
     // onClose
     'onClose'        => function ($connection) {
+
         global $connect_user;
+        if(!is_array($connect_user))
+        {
+            $connect_user = array();
+        }
 
         $key = array_search($connection, $connect_user);
-        if ($key !== false) {
+        if ($key) {
             unset($connect_user[$key]);
         }
 
