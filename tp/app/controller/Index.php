@@ -8,10 +8,7 @@ class Index extends BaseController
 {
     public function index()
     {
-        return 'CodeCrafter - api';
+        return '欢迎使用CodeCrafter Api服务';
     }
-    public function hello($name = 'ThinkPHP8')
-    {
-        return 'hello,' . $name;
-    }
+
 }
